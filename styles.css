@@ -14,11 +14,11 @@
         display: flex;
         margin-left: 10px;
     }
-    .nav-li a{
+    a{
         color: #d4d4d4;
         
     }
-    .nav-li a:hover{
+    a:hover{
         color: red;
         
     }

@@ -67,6 +67,9 @@
     font-size: 30px;
     text-align: center;
     }
+    .grid-item p{
+        font-size: 15px;
+    }
     footer{
         text-align: center;
     }

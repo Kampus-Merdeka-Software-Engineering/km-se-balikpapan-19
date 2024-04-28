@@ -4,47 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
+<link rel="stylesheet" href="styles.css">
 <body>
-    <header>
-        <h1>Dashboard</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
     <main>
-        <section id="statistics">
-            <h2>Statistics</h2>
-            <!-- Placeholder for statistics -->
-        </section>
-
-        <section id="form">
-            <h2>Form Feedback</h2>
-            <!-- Placeholder for form -->
-            <form>
-                <!-- Input fields, select dropdowns, and buttons go here -->
-                katergori <br>
-                <select name="katergori">
-                    <option value="tampilan">Tampilan</option>
-                    <option value="fungsi">Fungsi</option>
-                </select> <br>
-                Nama <br>
-                <input type="text" name="nama" placeholder="Nama"> <br>
-                Pesan <br>
-                <textarea name="Message" placeholder="message"></textarea> <br>
-                <input type="submit" value="kirim">
-            </form>
-        </section>
+        <div class="nav-wrapper">
+            <nav>
+                <ul class="nav-ul">
+                    <li class="nav-li"><a href="index.html">Home</a></li>
+                    <li class="nav-li"><a href="team.html">Team</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="profile-wrapper">
+            <img class="profile-picture" src="revou.png">
+            <h1>Section Balikpapan <span>Team 19</span> </h1>
+            <p>
+                <a href="mailto:blkpn.team19.revou@gmail.com">blkpn.team19.revou@gmail.com</a>
+            </p>
+        </div>    
+        <div class="bio-wrapper">
+            <p>Hi everyone 👋, We Are <span>Team 19 Section Balikpapan.</span></p>
+            <p>We Will show our Capstone Project <span>Dashabord Coffe Shop Sales</span></p>        
+        </div>
+        <div class="grid-container">
+            <div class="grid-item">Grafik 1</div>
+            <div class="grid-item">Grafik 2</div>
+            <div class="grid-item">Grafik 3</div>                
+          </div>
+          <footer>Copyrict Section Balikpapan Team 19</footer>
     </main>
     
-    <footer>
-        <p>&copy; 2024 Dashboard. All rights reserved.</p>
-    </footer>
 </body>
 </html>

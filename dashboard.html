@@ -13,7 +13,6 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
-    <script type="module" src="auth.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -76,7 +75,7 @@
               <h3>TOTAL SALES</h3>
               <span class="material-icons-outlined">inventory_2</span>
             </div>
-            <h1>$249K</h1>
+            <h1 id="total-sales"></h1>
           </div>
 
           <div class="card">
@@ -84,15 +83,7 @@
               <h3>TOTAL SOLD PRODUCT</h3>
               <span class="material-icons-outlined">category</span>
             </div>
-            <h1>25</h1>
-          </div>
-
-          <div class="card">
-            <div class="card-inner">
-              <h3>LOW SALES BY STORE</h3>
-              <span class="material-icons-outlined">groups</span>
-            </div>
-            <h1>Hell Kitchen</h1>
+            <h1 id="total-qty-sold"></h1>
           </div>
 
           <div class="card">
@@ -100,7 +91,15 @@
               <h3>MOST SALES BY STORE</h3>
               <span class="material-icons-outlined">notification_important</span>
             </div>
-            <h1>Manhattan</h1>
+            <h1 id="high_store"></h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <h3>LOW SALES BY STORE</h3>
+              <span class="material-icons-outlined">notification_important</span>
+            </div>
+            <h1 id="low_store"></h1>
           </div>
 
         </div>
@@ -108,13 +107,13 @@
         <div class="charts">
 
           <div class="charts-card">
-            <h2 class="chart-title">Top 5 Products</h2>
-            <div id="bar-chart"></div>
+            <h2 class="chart-title">Top 5 Products Category</h2>
+            <canvas id="barChart" width="400" height="200"></canvas>
           </div>
 
           <div class="charts-card">
             <h2 class="chart-title">Sales Coffe Shop</h2>
-            <div id="area-chart"></div>
+            <canvas id="lineChart" width="400" height="200"></canvas>
           </div>
 
         </div>
@@ -124,9 +123,8 @@
     </div>
 
     <!-- Scripts -->
-    <!-- ApexCharts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
-    <!-- Custom JS -->
+    <script type="module" src="js/auth.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js "></script>
     <script src="js/scripts.js"></script>
   </body>
 </html>

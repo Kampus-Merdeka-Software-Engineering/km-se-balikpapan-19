@@ -1,3 +1,246 @@
+  // Function to format the total sales
+  function formatTotalSales(totalSales) {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalSales);
+  }
+// Function to calculate total sales
+  function calculateTotalSales(data) {
+    let totalSales = 0;
+
+    data.forEach(transaction => {
+      const qty = parseFloat(transaction.transaction_qty);
+      const price = parseFloat(transaction.unit_price);
+      totalSales += qty * price;
+    });
+
+    return totalSales;
+  }
+  // Function to calculate total quantity sold
+  function calculateTotalQuantity(data) {
+    let totalQuantity = 0;
+
+    data.forEach(transaction => {
+      const qty = parseFloat(transaction.transaction_qty);
+      totalQuantity += qty;
+    });
+
+    return totalQuantity;
+  }
+  // Function to calculate the lowest sales by store
+  function calculateLowestSalesByStore(data) {
+      const storeSales = {};
+
+      // Aggregate sales by store
+      data.forEach(transaction => {
+        const storeId = transaction.store_location;
+        const qty = parseFloat(transaction.transaction_qty);
+        const price = parseFloat(transaction.unit_price);
+        const sales = qty * price;
+
+        if (!storeSales[storeId]) {
+          storeSales[storeId] = 0;
+        }
+
+        storeSales[storeId] += sales;
+      });
+
+      // Find the store with the lowest sales
+      let lowestSalesStore = null;
+      let lowestSales = Infinity;
+
+      for (const storeId in storeSales) {
+        if (storeSales[storeId] < lowestSales) {
+          lowestSales = storeSales[storeId];
+          lowestSalesStore = storeId;
+        }
+      }
+
+      return lowestSalesStore;
+  }
+  // Function to calculate the highest sales by store
+  function calculateHighestSalesByStore(data) {
+    const storeSales = {};
+
+    // Aggregate sales by store
+    data.forEach(transaction => {
+      const storeId = transaction.store_location;
+      const qty = parseFloat(transaction.transaction_qty);
+      const price = parseFloat(transaction.unit_price);
+      const sales = qty * price;
+
+      if (!storeSales[storeId]) {
+        storeSales[storeId] = 0;
+      }
+
+      storeSales[storeId] += sales;
+    });
+
+    // Find the store with the highest sales
+    let highestSalesStore = null;
+    let highestSales = -Infinity;
+
+    for (const storeId in storeSales) {
+      if (storeSales[storeId] > highestSales) {
+        highestSales = storeSales[storeId];
+        highestSalesStore = storeId;
+      }
+    }
+    return highestSalesStore;
+  }
+  // Function to calculate sales by store
+  function calculateSalesByStore(data) {
+    const storeSales = {};
+
+    // Aggregate sales by store
+    data.forEach(transaction => {
+      const storeId = transaction.store_location;
+      const qty = parseFloat(transaction.transaction_qty);
+      const price = parseFloat(transaction.unit_price);
+      const sales = qty * price;
+
+      if (!storeSales[storeId]) {
+        storeSales[storeId] = 0;
+      }
+
+      storeSales[storeId] += sales;
+    });
+
+    return storeSales;
+  }
+  // Function to calculate quantity sold by product
+  function calculateQuantitySoldByProduct(data) {
+    const productQuantity = {};
+
+    // Aggregate quantity sold by product
+    data.forEach(transaction => {
+      const productId = transaction.product_category;
+      const qty = parseFloat(transaction.transaction_qty);
+
+      if (!productQuantity[productId]) {
+        productQuantity[productId] = 0;
+      }
+
+      productQuantity[productId] += qty;
+    });
+
+    return productQuantity;
+  }
+  // Function to calculate monthly sales
+  function calculateMonthlySales(data) {
+    const monthlySales = {};
+
+    // Aggregate sales by month
+    data.forEach(transaction => {
+      const month = new Date(transaction.transaction_date).getMonth();
+      const qty = parseFloat(transaction.transaction_qty);
+      const price = parseFloat(transaction.unit_price);
+      const sales = qty * price;
+
+      if (!monthlySales[month]) {
+        monthlySales[month] = 0;
+      }
+
+      monthlySales[month] += sales;
+    });
+
+    return monthlySales;
+  }
+
+  // Load JSON data
+  fetch('../final_dataset.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      const totalSales = calculateTotalSales(data);
+      const total_sales_format = formatTotalSales(totalSales)
+      const totalQuantity = calculateTotalQuantity(data);
+      const low_sales_store = calculateLowestSalesByStore(data);
+      const high_store = calculateHighestSalesByStore(data);
+      const productQuantity  = calculateQuantitySoldByProduct(data);
+      const sortedProducts = Object.keys(productQuantity).sort((a, b) => productQuantity[b] - productQuantity[a]);
+      const topProducts = sortedProducts.slice(0, 5);
+      const topProductsLabels = topProducts.map(productId => productId);
+      const topProductsData = topProducts.map(productId => productQuantity[productId]);
+      // Create chart
+      const bar = document.getElementById('barChart');
+      const barChart = new Chart(bar, {
+        type: 'bar',
+        data: {
+          labels: topProductsLabels,
+          datasets: [{
+            label: 'Quantity Sold',
+            data: topProductsData,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          },
+          plugins: {
+            legend: {
+              display: false,
+              position: 'top',
+            }
+          }
+        }
+      });
+      const monthlySales = calculateMonthlySales(data);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+      const salesData = months.map((month, index) => monthlySales[index] || 0);
+      // Create chart
+      const line = document.getElementById('lineChart').getContext('2d');
+      const lineChart = new Chart(line, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Monthly Sales',
+            data: salesData,
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          },
+          plugins: {
+            
+          }
+        }
+      });
+      // Update the HTML content
+      document.getElementById('total-sales').textContent = total_sales_format;
+      document.getElementById('total-qty-sold').textContent = totalQuantity;
+      document.getElementById('low_store').textContent = low_sales_store;
+      document.getElementById('high_store').textContent = high_store;
+    })
+
+
+
 // SIDEBAR TOGGLE
 
 let sidebarOpen = false;
@@ -16,238 +259,3 @@ function closeSidebar() {
     sidebarOpen = false;
   }
 }
-
-// ---------- CHARTS ----------
-
-// BAR CHART
-const barChartOptions = {
-  series: [
-    {
-      data: [10, 8, 6, 4, 2],
-      name: 'Products',
-    },
-  ],
-  chart: {
-    type: 'bar',
-    background: 'transparent',
-    height: 350,
-    toolbar: {
-      show: false,
-    },
-  },
-  colors: ['#2962ff', '#d50000', '#2e7d32', '#ff6d00', '#583cb3'],
-  plotOptions: {
-    bar: {
-      distributed: true,
-      borderRadius: 4,
-      horizontal: false,
-      columnWidth: '40%',
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  fill: {
-    opacity: 1,
-  },
-  grid: {
-    borderColor: '#55596e',
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
-    xaxis: {
-      lines: {
-        show: true,
-      },
-    },
-  },
-  legend: {
-    labels: {
-      colors: '#f5f7ff',
-    },
-    show: true,
-    position: 'top',
-  },
-  stroke: {
-    colors: ['transparent'],
-    show: true,
-    width: 2,
-  },
-  tooltip: {
-    shared: true,
-    intersect: false,
-    theme: 'dark',
-  },
-  xaxis: {
-    categories: ['Laptop', 'Phone', 'Monitor', 'Headphones', 'Camera'],
-    title: {
-      style: {
-        color: '#f5f7ff',
-      },
-    },
-    axisBorder: {
-      show: true,
-      color: '#55596e',
-    },
-    axisTicks: {
-      show: true,
-      color: '#55596e',
-    },
-    labels: {
-      style: {
-        colors: '#f5f7ff',
-      },
-    },
-  },
-  yaxis: {
-    title: {
-      text: 'Count',
-      style: {
-        color: '#f5f7ff',
-      },
-    },
-    axisBorder: {
-      color: '#55596e',
-      show: true,
-    },
-    axisTicks: {
-      color: '#55596e',
-      show: true,
-    },
-    labels: {
-      style: {
-        colors: '#f5f7ff',
-      },
-    },
-  },
-};
-
-const barChart = new ApexCharts(
-  document.querySelector('#bar-chart'),
-  barChartOptions
-);
-barChart.render();
-
-// AREA CHART
-const areaChartOptions = {
-  series: [
-    {
-      name: 'Purchase Orders',
-      data: [31, 40, 28, 51, 42, 109, 100],
-    },
-    {
-      name: 'Sales Orders',
-      data: [11, 32, 45, 32, 34, 52, 41],
-    },
-  ],
-  chart: {
-    type: 'area',
-    background: 'transparent',
-    height: 350,
-    stacked: false,
-    toolbar: {
-      show: false,
-    },
-  },
-  colors: ['#00ab57', '#d50000'],
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-  dataLabels: {
-    enabled: false,
-  },
-  fill: {
-    gradient: {
-      opacityFrom: 0.4,
-      opacityTo: 0.1,
-      shadeIntensity: 1,
-      stops: [0, 100],
-      type: 'vertical',
-    },
-    type: 'gradient',
-  },
-  grid: {
-    borderColor: '#55596e',
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
-    xaxis: {
-      lines: {
-        show: true,
-      },
-    },
-  },
-  legend: {
-    labels: {
-      colors: '#f5f7ff',
-    },
-    show: true,
-    position: 'top',
-  },
-  markers: {
-    size: 6,
-    strokeColors: '#1b2635',
-    strokeWidth: 3,
-  },
-  stroke: {
-    curve: 'smooth',
-  },
-  xaxis: {
-    axisBorder: {
-      color: '#55596e',
-      show: true,
-    },
-    axisTicks: {
-      color: '#55596e',
-      show: true,
-    },
-    labels: {
-      offsetY: 5,
-      style: {
-        colors: '#f5f7ff',
-      },
-    },
-  },
-  yaxis: [
-    {
-      title: {
-        text: 'Purchase Orders',
-        style: {
-          color: '#f5f7ff',
-        },
-      },
-      labels: {
-        style: {
-          colors: ['#f5f7ff'],
-        },
-      },
-    },
-    {
-      opposite: true,
-      title: {
-        text: 'Sales Orders',
-        style: {
-          color: '#f5f7ff',
-        },
-      },
-      labels: {
-        style: {
-          colors: ['#f5f7ff'],
-        },
-      },
-    },
-  ],
-  tooltip: {
-    shared: true,
-    intersect: false,
-    theme: 'dark',
-  },
-};
-
-const areaChart = new ApexCharts(
-  document.querySelector('#area-chart'),
-  areaChartOptions
-);
-areaChart.render();

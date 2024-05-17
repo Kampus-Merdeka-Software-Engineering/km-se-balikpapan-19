@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Dashboard Sales Maven Coffe Shop</title>
 
     <!-- Montserrat Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <div class="grid-container">
-
       <!-- Header -->
       <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
           <span class="material-icons-outlined">menu</span>
         </div>
-        
       </header>
       <!-- End Header -->
 
@@ -31,9 +38,12 @@
       <aside id="sidebar">
         <div class="sidebar-title">
           <div class="sidebar-brand">
-            <span class="material-icons-outlined">shopping_cart</span> <small>Maven Coffe Shop</small> 
+            <span class="material-icons-outlined">shopping_cart</span>
+            <small>Maven Coffe Shop</small>
           </div>
-          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+          <span class="material-icons-outlined" onclick="closeSidebar()"
+            >close</span
+          >
         </div>
 
         <ul class="sidebar-list">
@@ -52,8 +62,6 @@
               <span class="material-icons-outlined">group</span> LogOut
             </a>
           </li>
-          
-          
         </ul>
       </aside>
       <!-- End Sidebar -->
@@ -63,72 +71,73 @@
         <div class="main-title">
           <h2>PRODUCT</h2>
         </div>
-        <table id="example" class="display" style="width:100%">
+        <table id="example" class="display" style="width: 100%">
           <thead>
-              <tr>
-                <th>Transaction ID</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Quantity</th>
-                <th>Store ID</th>
-                <th>Store Location</th>
-                <th>Product ID</th>
-                <th>Unit Price</th>
-                <th>Product Category</th>
-                <th>Product Type</th>
-                <th>Product Detail</th>
-              </tr>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Quantity</th>
+              <th>Store ID</th>
+              <th>Store Location</th>
+              <th>Product ID</th>
+              <th>Unit Price</th>
+              <th>Product Category</th>
+              <th>Product Type</th>
+              <th>Product Detail</th>
+            </tr>
           </thead>
-          <tbody>
-              
-          </tbody>
-          
-      </table>
-        
+          <tbody></tbody>
+        </table>
       </main>
       <!-- End Main -->
-
     </div>
 
     <!-- Scripts -->
     <script type="module" src="js/auth.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <script>
-      $(document).ready( function () {
-          $('#example').DataTable();
-      } );
-    fetch('../final_dataset.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json();
-    })
-    .then(data => {
-       // Check if DataTable is already initialized
-       if ($.fn.DataTable.isDataTable('#example')) {
-        // Destroy the DataTable to reinitialize it
-        $('#example').DataTable().destroy();
-      }
-      // Initialize DataTable
-      $('#example').DataTable({
-        data: data,
-        columns: [
-          { data: 'transaction_id' },
-          { data: 'transaction_date' },
-          { data: 'transaction_time' },
-          { data: 'transaction_qty' },
-          { data: 'store_id' },
-          { data: 'store_location' },
-          { data: 'product_id' },
-          { data: 'unit_price' },
-          { data: 'product_category' },
-          { data: 'product_type' },
-          { data: 'product_detail' }      
-        ]
-      })
-    });
+      $(document).ready(function () {
+        $("#example").DataTable();
+      });
+      fetch("../final_dataset.json")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              "Network response was not ok " + response.statusText
+            );
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Check if DataTable is already initialized
+          if ($.fn.DataTable.isDataTable("#example")) {
+            // Destroy the DataTable to reinitialize it
+            $("#example").DataTable().destroy();
+          }
+          // Initialize DataTable
+          $("#example").DataTable({
+            data: data,
+            columns: [
+              { data: "transaction_id" },
+              { data: "transaction_date" },
+              { data: "transaction_time" },
+              { data: "transaction_qty" },
+              { data: "store_id" },
+              { data: "store_location" },
+              { data: "product_id" },
+              { data: "unit_price" },
+              { data: "product_category" },
+              { data: "product_type" },
+              { data: "product_detail" },
+            ],
+          });
+        });
     </script>
     <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js "></script>
     <script src="js/scripts.js"></script>

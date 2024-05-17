@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stysheet" href="ji24.css">
+    <title>Write JavaScript to load and parse a local JSON file</title>
+</head>
+<body>
+    <div class="chart">
+        <div class="chart_types"></div>
+            <button onclick="setchartType('bar')" >Bars</button>
+            <button onclick="setchartType('line')" >Line</button>
+            <button onclick="setchartType('doughnut')" >Doughnut</button>
+            <button onclick="setchartType('polarArea')" >PolarArea</button>
+            <button onclick="setchartType('radar')" >Radar</button>
+
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="ji24.js"></script>
+</body>
+</html>

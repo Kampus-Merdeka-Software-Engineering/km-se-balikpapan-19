@@ -49,7 +49,7 @@ submit.addEventListener("click", function (event) {
       const errorMessage = error.message;
       Swal.fire({
         title: 'Error!',
-        text: 'Cek Username dan Password!',
+        text: 'Cek Email dan Password!',
         icon: 'error',
         confirmButtonText: 'Cool'
       });

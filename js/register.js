@@ -27,7 +27,7 @@ submit.addEventListener("click", function () {
       const user = userCredential.user;
       Swal.fire({
         icon: "success",
-        title: "Login Sukses",
+        title: "Register Sukses",
         showConfirmButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
@@ -37,8 +37,11 @@ submit.addEventListener("click", function () {
       });
     })
     .catch((error) => {
-      const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorMessage);
+      Swal.fire({
+        icon: "error",
+        title: errorMessage,
+        showConfirmButton: true,
+      });
     });
 });

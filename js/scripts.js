@@ -168,6 +168,7 @@ let barChartInstance = null;
 let lineChartInstance = null;
 
 // Function to update the charts and metrics
+// Function to update the charts and metrics
 function updateDashboard(data) {
   const totalSales = calculateTotalSales(data);
   const total_sales_format = formatTotalSales(totalSales);
@@ -193,7 +194,7 @@ function updateDashboard(data) {
   }
 
   // Create bar chart
-  const bar = document.getElementById("barChart");
+  const bar = document.getElementById("barChartProductCategory");
   barChartInstance = new Chart(bar, {
     type: "bar",
     data: {
@@ -231,6 +232,19 @@ function updateDashboard(data) {
           display: false,
           position: "top",
         },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: function (context) {
+              let label = context.dataset.label || '';
+              if (label) {
+                label += ': ';
+              }
+              label += context.parsed.y;
+              return label;
+            },
+          },
+        },
       },
     },
   });
@@ -241,7 +255,7 @@ function updateDashboard(data) {
   }
 
   // Create line chart
-  const line = document.getElementById("lineChart").getContext("2d");
+  const line = document.getElementById("lineChartSalesCoffeShop").getContext("2d");
   lineChartInstance = new Chart(line, {
     type: "line",
     data: {
@@ -262,7 +276,24 @@ function updateDashboard(data) {
           beginAtZero: true,
         },
       },
-      plugins: {},
+      plugins: {
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: function (context) {
+              let label = context.dataset.label || '';
+              if (label) {
+                label += ': ';
+              }
+              label += new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+              }).format(context.parsed.y);
+              return label;
+            },
+          },
+        },
+      },
     },
   });
 

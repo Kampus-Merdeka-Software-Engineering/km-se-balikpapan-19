@@ -25,8 +25,16 @@ submit.addEventListener("click", function () {
     .then((userCredential) => {
       // Signed up
       const user = userCredential.user;
-      alert("Creating Account ....");
-      window.location.href = "dashboard.html";
+      Swal.fire({
+        icon: "success",
+        title: "Login Sukses",
+        showConfirmButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirect to dashboard
+          window.location.href = "dashboard.html";
+        }
+      });
     })
     .catch((error) => {
       const errorCode = error.code;

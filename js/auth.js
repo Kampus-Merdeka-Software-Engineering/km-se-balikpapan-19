@@ -24,10 +24,7 @@ onAuthStateChanged(auth, (user) => {
 
 const logout = document.getElementById("logout");
 logout.addEventListener("click", function () {
-  signOut(auth)
-    .then(() => {
-      alert("Sign-out successful.");
-    })
+  signOut(auth)    
     .catch((error) => {
       alert(error);
     });

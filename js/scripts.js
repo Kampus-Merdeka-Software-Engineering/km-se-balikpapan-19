@@ -159,7 +159,10 @@ function calculateMonthlySales(data) {
 function filterDataByDate(data, startDate, endDate) {
   return data.filter((transaction) => {
     const transactionDate = new Date(transaction.transaction_date);
-    return transactionDate >= new Date(startDate) && transactionDate <= new Date(endDate);
+    return (
+      transactionDate >= new Date(startDate) &&
+      transactionDate <= new Date(endDate)
+    );
   });
 }
 
@@ -222,6 +225,7 @@ function updateDashboard(data) {
       ],
     },
     options: {
+      responsive: true,
       scales: {
         y: {
           beginAtZero: true,
@@ -236,9 +240,9 @@ function updateDashboard(data) {
           enabled: true,
           callbacks: {
             label: function (context) {
-              let label = context.dataset.label || '';
+              let label = context.dataset.label || "";
               if (label) {
-                label += ': ';
+                label += ": ";
               }
               label += context.parsed.y;
               return label;
@@ -255,7 +259,9 @@ function updateDashboard(data) {
   }
 
   // Create line chart
-  const line = document.getElementById("lineChartSalesCoffeShop").getContext("2d");
+  const line = document
+    .getElementById("lineChartSalesCoffeShop")
+    .getContext("2d");
   lineChartInstance = new Chart(line, {
     type: "line",
     data: {
@@ -271,6 +277,7 @@ function updateDashboard(data) {
       ],
     },
     options: {
+      responsive: true,
       scales: {
         y: {
           beginAtZero: true,
@@ -281,13 +288,13 @@ function updateDashboard(data) {
           enabled: true,
           callbacks: {
             label: function (context) {
-              let label = context.dataset.label || '';
+              let label = context.dataset.label || "";
               if (label) {
-                label += ': ';
+                label += ": ";
               }
-              label += new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
+              label += new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
               }).format(context.parsed.y);
               return label;
             },
@@ -306,11 +313,11 @@ function updateDashboard(data) {
 
 // Function to handle date filter
 function filterData() {
-  const startDate = document.getElementById('start-date').value;
-  const endDate = document.getElementById('end-date').value;
-  
+  const startDate = document.getElementById("start-date").value;
+  const endDate = document.getElementById("end-date").value;
+
   if (new Date(endDate) < new Date(startDate)) {
-    showModal('End date cannot be earlier than start date');
+    showModal("End date cannot be earlier than start date");
     return;
   }
 
@@ -337,19 +344,19 @@ function showModal(message) {
   modalMessage.textContent = message;
   modal.style.display = "block";
 
-  span.onclick = function() {
+  span.onclick = function () {
     modal.style.display = "none";
-  }
+  };
 
-  closeModalButton.onclick = function() {
+  closeModalButton.onclick = function () {
     modal.style.display = "none";
-  }
+  };
 
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
-  }
+  };
 }
 
 // Initial load JSON data and update the dashboard
@@ -365,7 +372,9 @@ fetch("../final_dataset.json")
     updateDashboard(data);
 
     // Add event listener to the filter button
-    document.querySelector('.date-range button').addEventListener('click', filterData);
+    document
+      .querySelector(".date-range button")
+      .addEventListener("click", filterData);
   });
 
 // SIDEBAR TOGGLE

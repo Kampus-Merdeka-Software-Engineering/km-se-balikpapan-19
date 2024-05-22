@@ -121,6 +121,9 @@ span.password {
   float: right;
   padding-top: 16px;
 }
+.text-center{
+  text-align: center;
+}
 @media (max-width: 500px) {
   .grid-container {
     grid-template-columns: 1fr;

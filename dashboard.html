@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modal-message"></p>
+        <button id="closeModalButton">Close</button>
+      </div>
+    </div>
     <div class="grid-container">
 
       <!-- Header -->
@@ -50,13 +58,21 @@
         </ul>
       </aside>
       <!-- End Sidebar -->
-
+      
       <!-- Main -->
-      <main class="main-container">
+      <main class="main-container">        
         <div class="main-title">
           <h2>DASHBOARD</h2>
         </div>
-
+        <section class="filter-chart">
+          <div class="date-range">
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date">
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date">
+            <button onclick="filterData()">Filter</button>
+          </div>
+        </section>
         <div class="main-cards">
 
           <div class="card">

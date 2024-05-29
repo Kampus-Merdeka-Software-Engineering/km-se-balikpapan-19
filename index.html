@@ -1,40 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <link rel="icon" type="image/png" href="img/icon.jpeg" />
-  </head>
-  <link rel="stylesheet" href="css/styles_landing_page.css" />
-  <body>
-    <main>
-      <section class="nav-wrapper">
-        <nav>
-          <ul class="nav-ul">
-            <li class="nav-li"><a href="index.html">Home</a></li>
-            <!-- <li class="nav-li"><a href="team.html">Team</a></li> -->
-            <li class="nav-li"><a href="login.html">Dashboard</a></li>
-          </ul>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maven Roaster Coffee Shop</title>
+
+    <!-- Font Awesome CDN Link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Custom CSS File Link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+        <a href="#" class="logo">Maven Roaster Coffee <i class="fas fa-mug-hot"></i></a>
+
+        <nav class="navbar">
+            <a href="#home">home</a>
+            <a href="dashboard.html">dashboard</a>
+            <a href="#about">about</a>
+            <a href="#menu">team</a>
+            <a href="#book">feedback</a>
         </nav>
-      </section>
-      <section class="profile-wrapper">
-        <img class="profile-picture" src="img/revou.png" />
-        <h1>Section Balikpapan <span>Team 19</span></h1>
-        <p>
-          <a href="mailto:blkpn.team19.revou@gmail.com"
-            >blkpn.team19.revou@gmail.com</a
-          >
-        </p>
-      </section>
-      <article class="bio-wrapper">
-        <p>Hi everyone 👋, We Are <span>Team 19 Section Balikpapan.</span></p>
-        <p>
-          We Will show our Capstone Project
-          <span> <a href="dashboard.html">Dashboard</a> Coffe Shop Sales</span>
-        </p>
-      </article>
-      <footer>Copyright Section Balikpapan Team 19</footer>
-    </main>
-  </body>
+    </header>
+
+    <!-- HOME -->
+    <section class="home" id="home">
+        <div class="row">
+            <div class="content">
+                <h3>Maven Roaster Coffee Shop</h3>
+            </div>
+
+            <div class="image">
+                <img src="image/home-img-1.png" class="main-home-image" alt="">
+            </div>
+        </div>
+
+        <div class="image-slider">
+            <img src="image/home-img-1.png" alt="">
+            <img src="image/home-img-2.png" alt="">
+            <img src="image/home-img-3.png" alt="">
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <h1 class="heading">about us</h1>
+
+        <div class="row">
+            <div class="image">
+                <img src="image/about-img.png" alt="">
+            </div>
+
+            <div class="content">
+                <h3 class="title">Maven Roaster Coffe Shop</h3>
+                <p>coffee shop location on NYC, operating out of three NYC locations. 
+                    Lower Manhattan, Heel's Kitchen, Astoria</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="menu" id="menu">
+        <h1 class="heading">TEAM</h1>
+
+        <div class="box-container">
+            <img src="image/team.jpg" width="100%" alt="">
+        </div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section class="book" id="book">
+        <h1 class="heading">Feedback</h1>
+
+        <form action="">
+            <input type="text" placeholder="Name" class="box">
+            <input type="email" placeholder="Email" class="box">
+            <textarea name="" placeholder="Message" class="box" id="" cols="30" rows="10"></textarea>
+            <input type="submit" value="send feedback" class="btn">
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>our branches</h3>
+                <a href="#"><i class="fas fa-arrow-right"></i> Hell's Kitchen"></i> africa</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Astoria</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Lower Manhattan</a>
+            </div>
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="index.html"><i class="fas fa-arrow-right"></i> home</a>
+                <a href="about"><i class="fas fa-arrow-right"></i> about</a>
+                <a href="dashboard.html"><i class="fas fa-arrow-right"></i> dashboard</a>
+                <a href="#review"><i class="fas fa-arrow-right"></i> feedback</a>                
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"><i class="fas fa-phone"></i> +62812-9680-5874</a>
+                <a href="#"><i class="fas fa-envelope"></i> blkpn.team19.revou@gmail.com</a>
+                <a href="#"><i class="fas fa-envelope"></i> Balikpapan Team 19</a>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"><i class="fab fa-facebook-f"></i> KM REVOU BALIKPAPAN TEAM 19</a>                
+            </div>
+        </div>
+
+        <div class="credit">created by <span>Team 19 Balikpapan</span> | all rights reserved</div>
+    </section>
+</body>
+
 </html>

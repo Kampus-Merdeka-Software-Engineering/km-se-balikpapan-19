@@ -152,7 +152,20 @@ function calculateMonthlySales(data) {
     monthlySales[month] += sales;
   });
 
-  return monthlySales;
+  // Extract unique months
+  const uniqueMonths = [...new Set(data.map(transaction => new Date(transaction.transaction_date).getMonth()))];
+
+  // Create labels for the chart
+  const labels = uniqueMonths.map(month => {
+    // Assuming you want month names instead of indexes
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+    return monthNames[month];
+  });
+
+  // Create data array for the chart
+  const salesData = uniqueMonths.map(month => monthlySales[month] || 0);
+
+  return { labels, salesData };
 }
 
 // Function to filter data by date range
@@ -171,7 +184,6 @@ let barChartInstance = null;
 let lineChartInstance = null;
 
 // Function to update the charts and metrics
-// Function to update the charts and metrics
 function updateDashboard(data) {
   const totalSales = calculateTotalSales(data);
   const total_sales_format = formatTotalSales(totalSales);
@@ -187,9 +199,7 @@ function updateDashboard(data) {
   const topProductsData = topProducts.map(
     (productId) => productQuantity[productId]
   );
-  const monthlySales = calculateMonthlySales(data);
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  const salesData = months.map((month, index) => monthlySales[index] || 0);
+  const { labels, salesData } = calculateMonthlySales(data);
 
   // Destroy existing bar chart instance if it exists
   if (barChartInstance) {
@@ -265,7 +275,7 @@ function updateDashboard(data) {
   lineChartInstance = new Chart(line, {
     type: "line",
     data: {
-      labels: months,
+      labels: labels,
       datasets: [
         {
           label: "Monthly Sales",
@@ -315,7 +325,6 @@ function updateDashboard(data) {
 function filterData() {
   const startDate = document.getElementById("start-date").value;
   const endDate = document.getElementById("end-date").value;
-
   if (new Date(endDate) < new Date(startDate)) {
     showModal("End date cannot be earlier than start date");
     return;
